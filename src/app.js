@@ -9,7 +9,28 @@ class App extends React.Component {
   constructor() {
     super()
 
+    this.state = {
+      currentCount: 10
+    }
+
+    this.countDown = this.countDown.bind(this)
     this.messageDisplay = this.messageDisplay.bind(this)
+  }
+
+  countDown() {
+    let newCount = this.state.currentCount
+    newCount = newCount === 10 ? 0 : newCount + 1
+    if(newCount >= 0) {
+      this.setState({ currentCount: newCount })
+    } else {
+      clearInterval(this.state.intervalId)
+    }
+    console.log('currentCount', this.state.currentCount)
+  }
+
+
+  componentDidMount() {
+    setInterval(this.countDown, 1000)
   }
 
 
@@ -29,7 +50,6 @@ class App extends React.Component {
     })
   }
 
-  // setInterval(messageDisplay, 100)
 
   render() {
     return (
