@@ -10,7 +10,8 @@ class App extends React.Component {
     super()
 
     this.state = {
-      currentCount: 10
+      currentCount: 10,
+      message: ''
     }
 
     this.countDown = this.countDown.bind(this)
@@ -19,32 +20,51 @@ class App extends React.Component {
 
   countDown() {
     let newCount = this.state.currentCount
-    newCount = newCount === 10 ? 0 : newCount + 1
+    newCount = newCount === 0 ? 10 : newCount - 1
     if(newCount >= 0) {
       this.setState({ currentCount: newCount })
     } else {
       clearInterval(this.state.intervalId)
     }
-    console.log('currentCount', this.state.currentCount)
   }
 
 
 
   messageDisplay() {
+    // this.setState({ currentCount: 10 })
     // e.preventDefault()
     const form = document.forms[0]
     // const board = document.getElementById('messageGridContainer')
     const grid = document.querySelectorAll('.messageGrid')
-    const message = form.elements[0].value
-    message.split('')
-    console.log('message', message)
-    // let count = 0
+    // let message = 'Hello World!'
     const count = this.state.currentCount
+    const message = form.elements[0].value
+    this.setState({ message: message })
+    // message.split('')
+    console.log('message', message)
+    console.log('message[count]', message[count])
+    console.log('currentCount', this.state.currentCount)
+    // let count = 0
 
-    grid.forEach(square => {
-      // count = count === 9 ? 0 : count + 1
-      square.innerText = `${message[count]}`
-    })
+    // const index = count + message.length
+    // console.log('index', index)
+    for (let i = 0; i < grid.length; i++) {
+      grid[i].innerText = `${message[i + count]}`
+      // index ++
+    }
+
+    // if (message) {
+      // grid.forEach(square => {
+      //   // count = count === 9 ? 0 : count + 1
+      //   square.innerText = `${message[count]}`
+      // })
+
+      // index = index === message.length ? 0 : index + 1
+      // grid[count].innerText = `${message[index]}`
+      // for (let i = 0; i <= message.length; i++) {
+      // }
+
+    // }
   }
 
   componentDidMount() {
@@ -69,6 +89,7 @@ class App extends React.Component {
                   type="text"
                   name="message"
                   placeholder="enter your message"
+                  value="Hello World!"
                   onChange={this.messageDisplay}
                 />
               </div>
@@ -84,7 +105,7 @@ class App extends React.Component {
               <div className="messageGrid"></div>
               <div className="messageGrid"></div>
             </div>
-            <button id="messageButton" onClick={this.messageDisplay}>Start Message</button>
+            <button id="messageButton">Start Message</button>
           </form>
         </div>
       </section>
