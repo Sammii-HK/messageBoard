@@ -29,25 +29,30 @@ class App extends React.Component {
   }
 
 
-  componentDidMount() {
-    setInterval(this.countDown, 1000)
-  }
 
-
-  messageDisplay(e) {
-    e.preventDefault()
+  messageDisplay() {
+    // e.preventDefault()
     const form = document.forms[0]
     // const board = document.getElementById('messageGridContainer')
     const grid = document.querySelectorAll('.messageGrid')
     const message = form.elements[0].value
     message.split('')
     console.log('message', message)
-    let count = 0
+    // let count = 0
+    const count = this.state.currentCount
 
     grid.forEach(square => {
-      count = count === 9 ? 0 : count + 1
+      // count = count === 9 ? 0 : count + 1
       square.innerText = `${message[count]}`
     })
+  }
+
+  componentDidMount() {
+    setInterval(this.countDown, 1000)
+  }
+
+  componentDidUpdate() {
+    setInterval(this.messageDisplay, 1000)
   }
 
 
