@@ -44,19 +44,44 @@ class App extends React.Component {
     // message.split('')
     console.log('message[count]', message[count])
 
-    // const firstLetter = message[0]
+
 
     // const gridStart = grid.firstIndex()
     // const gridEnd = grid.lastIndex() - message.length
     // console.log('gridEnd', gridEnd)
+
+    // THIS PHASES THE FIRST LETTER THROUGH THE MESSAGE BOARD
+    // grid.forEach(square => {
+    //   let messageIndex = 0
+    //   let gridIndex = count
+    //   grid[gridIndex].innerText = `${message[messageIndex]}`
+    //   square.innerText = ''
+    //   gridIndex ++
+    //   messageIndex ++
+    // })
+    // ================================================
+
+    let messageIndex = 0
+
+    let gridIndex = count
+
     grid.forEach(square => {
-      let messageIndex = 0
-      let gridIndex = count
-      grid[gridIndex].innerText = `${message[messageIndex]}`
+      // grid[gridIndex].innerText = `${message[0]}`
+      // loop through the grid and repeat line 66
+      // each loop should decrease the gridIndex by one
+      // and increase the message index by one
+      if (grid[gridIndex]) {
+        for (let i = 0; i <= message.length; i++) {
+          grid[gridIndex].innerText = `${message[messageIndex]}`
+        }
+        gridIndex --
+        messageIndex ++
+        console.log('messageIndex', messageIndex)
+        console.log('gridIndex', gridIndex)
+      }
       square.innerText = ''
-      gridIndex ++
-      messageIndex ++
     })
+
 
     // let messageIndex = count
     // messageIndex = messageIndex === 0 ? messageIndex : messageIndex - 1
