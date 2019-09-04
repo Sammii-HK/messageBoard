@@ -49,48 +49,36 @@ class App extends React.Component {
 
 
   messageDisplay() {
-    // this.gridCount()
-    const grid = document.getElementById('messageGridContainer')
 
     const form = document.forms[0]
     const count = this.state.gridCount
     const message = form.elements[0].value.split('')
     const display = this.state.display
-    const displayValue = display
+    // const displayValue = display
 
     console.log('display', display)
-    // console.log('message', message)
-    console.log('displayValue', displayValue)
 
     let gridIndex = count
-    // let messageIndex = 0
-
-    // for (let i = 0; i <= grid.length; i ++) {
-    //   grid[gridIndex].innerText = `${message[messageIndex]}`
-    //   gridIndex ++
-    //   messageIndex ++
-    // }
-
-    // message.forEach(letter => {
-    //   grid[gridIndex].innerText = ''
-    //   grid[gridIndex].innerText = letter
-    //   gridIndex ++
-    // })
 
     message.forEach(letter => {
       if (gridIndex < 9) {
-        displayValue[gridIndex] = ''
-        displayValue[gridIndex] = letter
+        display[gridIndex] = letter
         gridIndex ++
-
       }
+      display[gridIndex] = ''
     })
 
-    // grid[gridIndex]
-    // if (gridIndex < grid.length && gridIndex > 0) {
-    //   grid[gridIndex]
-    // }
 
+
+    // message.forEach(letter => {
+    //   for (let i = 0; i <= display.length; i++) {
+    //     if (gridIndex < 9) {
+    //       display[gridIndex] = letter
+    //       gridIndex ++
+    //     }
+    //     display[i] = ''
+    //   }
+    // })
 
 
   }
@@ -105,8 +93,6 @@ class App extends React.Component {
 
   componentDidUpdate() {
     this.messageDisplay()
-
-    // setInterval(this.messageDisplay, 1000)
   }
 
 
