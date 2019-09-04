@@ -10,50 +10,36 @@ class App extends React.Component {
     super()
 
     this.state = {
-      currentCount: 0,
       gridCount: 0,
-      message: ''
+      message: [],
+      display: [
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        ''
+      ]
     }
 
-    this.countDown = this.countDown.bind(this)
     this.gridCount = this.gridCount.bind(this)
     this.messageDisplay = this.messageDisplay.bind(this)
-  }
-
-  countDown() {
-    const form = document.forms[0]
-    const message = form.elements[0].value
-    const grid = document.querySelectorAll('.messageGrid')
-
-    // const gridCountValue = grid.length
-    // this.setState({ gridCount: gridCountValue })
-
-    const countValue = message.length + grid.length
-    let newCount = this.state.currentCount
-    newCount = newCount === 0 ? countValue : newCount - 1
-    console.log('currentCount', this.state.currentCount)
-    if(newCount >= 0) {
-      this.setState({ currentCount: newCount })
-    } else {
-      clearInterval(this.state.intervalId)
-    }
-    // this.gridCount()
   }
 
   gridCount() {
     const form = document.forms[0]
     const message = form.elements[0].value
     const grid = document.querySelectorAll('.messageGrid')
-    const gridCountValue = grid.length
-    // this.setState({ gridCount: gridCountValue })
+    const gridCountValue = grid.length - 1
     const minCountValue = (0 - message.length)
     let newCount = this.state.gridCount
-    console.log('**newCount1**', newCount)
     newCount = newCount === minCountValue ? gridCountValue : newCount - 1
-    // this.setState({ gridCount: newCount })
-    // console.log('minCountValue', minCountValue)
-    console.log('**gridCount**', this.state.gridCount)
-    console.log('**newCount2**', newCount)
+
+    console.log('>>>> gridCount', this.state.gridCount)
+
     if(newCount >= minCountValue) {
       this.setState({ gridCount: newCount })
     } else {
@@ -62,143 +48,65 @@ class App extends React.Component {
   }
 
 
-  // grid index 10 must contain the first letter of the message
-  // then the index should decrease
-
   messageDisplay() {
+    // this.gridCount()
+    const grid = document.getElementById('messageGridContainer')
+
     const form = document.forms[0]
-    // const board = document.getElementById('messageGridContainer')
-    const grid = document.querySelectorAll('.messageGrid')
-    const count = this.state.currentCount
-    // count = count === 8 ? 0 : count + 1
-    const message = form.elements[0].value
-    // this.setState({ message: message })
+    const count = this.state.gridCount
+    const message = form.elements[0].value.split('')
+    const display = this.state.display
+    const displayValue = display
 
-    let gridIndex = grid.length
+    console.log('display', display)
+    // console.log('message', message)
+    console.log('displayValue', displayValue)
 
-    // this.setState({ gridCount: gridIndex })
+    let gridIndex = count
+    // let messageIndex = 0
 
-    let countValue = message.length + grid.length
-
-    let messageIndex = 0
-    // gridIndex = gridIndex === (0 - message.length) ? grid.length : gridIndex - 1
-    console.log('messageIndex', messageIndex)
-    console.log('gridIndex', gridIndex)
-    if (grid[gridIndex]) {
-      grid.forEach(square => {
-        square.innerText = ''
-        grid[gridIndex].innerText = `${message[messageIndex]}`
-      })
-      // gridIndex ++
-      messageIndex ++
-      // countValue --
-    }
-
-
-
-    // const gridStart = grid.firstIndex()
-    // const gridEnd = grid.lastIndex() - message.length
-    // console.log('gridEnd', gridEnd)
-
-    // THIS PHASES THE FIRST LETTER THROUGH THE MESSAGE BOARD
-    // grid.forEach(square => {
-    //   let messageIndex = 0
-    //   let gridIndex = count
+    // for (let i = 0; i <= grid.length; i ++) {
     //   grid[gridIndex].innerText = `${message[messageIndex]}`
-    //   square.innerText = ''
     //   gridIndex ++
     //   messageIndex ++
+    // }
+
+    // message.forEach(letter => {
+    //   grid[gridIndex].innerText = ''
+    //   grid[gridIndex].innerText = letter
+    //   gridIndex ++
     // })
-    // ================================================
 
-    // DISPLAYS THE MESSAGE BACKWARDS ON THE FIRST FEW BOXES
-    // let messageIndex = 0
-    // let gridIndex = count
-    // gridIndex = gridIndex === 0 ? 8 : gridIndex - 1
-    // grid.forEach(square => {
-    //   // grid[gridIndex].innerText = `${message[0]}`
-    //   // loop through the grid and repeat line 66
-    //   // each loop should decrease the gridIndex by one
-    //   // and increase the message index by one
-    //   if (grid[gridIndex]) {
-    //     for (let i = 0; i <= 8; i++) {
-    //       grid[gridIndex].innerText = `${message[messageIndex]}`
-    //     }
-    //     gridIndex --
-    //     messageIndex ++
-    //     console.log('messageIndex', messageIndex)
-    //     console.log('gridIndex', gridIndex)
-    //   }
-    //   square.innerText = ''
-    // })
-    // =====================================================
+    message.forEach(letter => {
+      if (gridIndex < 9) {
+        displayValue[gridIndex] = ''
+        displayValue[gridIndex] = letter
+        gridIndex ++
 
-    // PHASES THROUGH 4 LETTERS IN THE CENTRAL BOXES
-    // let messageIndex = 0
-    // let gridIndex = count + message.length
-    // gridIndex = gridIndex === (9 + message.length) ? 0 : gridIndex - 1
-    // grid.forEach(square => {
-    //   // grid[gridIndex].innerText = `${message[0]}`
-    //   // loop through the grid and repeat line 66
-    //   // each loop should decrease the gridIndex by one
-    //   // and increase the message index by one
-    //   for (let i = 0; i <= grid.length; i++) {
-    //     if (grid[gridIndex]) {
-    //       grid[gridIndex].innerText = `${message[messageIndex]}`
-    //     }
-    //     console.log('**==**')
-    //   }
-    //   gridIndex --
-    //   messageIndex ++
-    //   console.log('messageIndex', messageIndex)
-    //   console.log('gridIndex', gridIndex)
-    //   square.innerText = ''
-    // })
-    //
-    // console.log('====================================')
-    // ============================================
+      }
+    })
 
-    // DISPLAYS lroW
-    // let countValue = message.length + grid.length
-    //
-    // let messageIndex = 0
-    // let gridIndex = grid.length
-    // // gridIndex = gridIndex === (0 - message.length) ? grid.length : gridIndex - 1
-    // console.log('messageIndex', messageIndex)
-    // console.log('gridIndex', gridIndex)
-    // grid.forEach(square => {
-    //   if (grid[gridIndex]) {
-    //     grid[gridIndex].innerText = `${message[messageIndex]}`
-    //   }
-    //   gridIndex --
-    //   messageIndex ++
-    //   square.innerText = ''
-    //   // countValue --
-    // })
-    //
-    // console.log('====================================')
-
-
-
-
+    // grid[gridIndex]
+    // if (gridIndex < grid.length && gridIndex > 0) {
+    //   grid[gridIndex]
+    // }
 
 
 
   }
 
   componentDidMount() {
-    // setInterval(this.countDown, 5000)
-    setInterval(this.countDown, 1000)
     setInterval(this.gridCount, 1000)
-    // this.messageDisplay()
 
-    const grid = document.querySelectorAll('.messageGrid')
-    const gridCountValue = grid.length
+    const display = this.state.display
+    const gridCountValue = display.length
     this.setState({ gridCount: gridCountValue })
   }
 
   componentDidUpdate() {
     this.messageDisplay()
+
+    // setInterval(this.messageDisplay, 1000)
   }
 
 
@@ -221,16 +129,11 @@ class App extends React.Component {
               </div>
             </div>
             <div id="messageGridContainer" className="columns is-centered is-mobile">
-              <div className="messageGrid"></div>
-              <div className="messageGrid"></div>
-              <div className="messageGrid"></div>
-              <div className="messageGrid"></div>
-              <div className="messageGrid"></div>
-              <div className="messageGrid"></div>
-              <div className="messageGrid"></div>
-              <div className="messageGrid"></div>
-              <div className="messageGrid"></div>
-              <div className="messageGrid"></div>
+              {this.state.display.map((grid, i) =>
+                <div className="messageGrid" key={i}>
+                  {this.state.display[i]}
+                </div>
+              )}
             </div>
             <button id="messageButton">Start Message</button>
           </form>
