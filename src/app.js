@@ -10,20 +10,52 @@ class App extends React.Component {
     super()
 
     this.state = {
-      currentCount: 8,
+      currentCount: 0,
+      gridCount: 0,
       message: ''
     }
 
     this.countDown = this.countDown.bind(this)
+    this.gridCount = this.gridCount.bind(this)
     this.messageDisplay = this.messageDisplay.bind(this)
   }
 
   countDown() {
+    const form = document.forms[0]
+    const message = form.elements[0].value
+    const grid = document.querySelectorAll('.messageGrid')
+
+    // const gridCountValue = grid.length
+    // this.setState({ gridCount: gridCountValue })
+
+    const countValue = message.length + grid.length
     let newCount = this.state.currentCount
-    newCount = newCount === 0 ? 8 : newCount - 1
+    newCount = newCount === 0 ? countValue : newCount - 1
     console.log('currentCount', this.state.currentCount)
     if(newCount >= 0) {
       this.setState({ currentCount: newCount })
+    } else {
+      clearInterval(this.state.intervalId)
+    }
+    // this.gridCount()
+  }
+
+  gridCount() {
+    const form = document.forms[0]
+    const message = form.elements[0].value
+    const grid = document.querySelectorAll('.messageGrid')
+    const gridCountValue = grid.length
+    // this.setState({ gridCount: gridCountValue })
+    const minCountValue = (0 - message.length)
+    let newCount = this.state.gridCount
+    console.log('**newCount1**', newCount)
+    newCount = newCount === minCountValue ? gridCountValue : newCount - 1
+    // this.setState({ gridCount: newCount })
+    // console.log('minCountValue', minCountValue)
+    console.log('**gridCount**', this.state.gridCount)
+    console.log('**newCount2**', newCount)
+    if(newCount >= minCountValue) {
+      this.setState({ gridCount: newCount })
     } else {
       clearInterval(this.state.intervalId)
     }
@@ -41,8 +73,26 @@ class App extends React.Component {
     // count = count === 8 ? 0 : count + 1
     const message = form.elements[0].value
     // this.setState({ message: message })
-    // message.split('')
-    console.log('message[count]', message[count])
+
+    let gridIndex = grid.length
+
+    // this.setState({ gridCount: gridIndex })
+
+    let countValue = message.length + grid.length
+
+    let messageIndex = 0
+    // gridIndex = gridIndex === (0 - message.length) ? grid.length : gridIndex - 1
+    console.log('messageIndex', messageIndex)
+    console.log('gridIndex', gridIndex)
+    if (grid[gridIndex]) {
+      grid.forEach(square => {
+        square.innerText = ''
+        grid[gridIndex].innerText = `${message[messageIndex]}`
+      })
+      // gridIndex ++
+      messageIndex ++
+      // countValue --
+    }
 
 
 
@@ -61,87 +111,90 @@ class App extends React.Component {
     // })
     // ================================================
 
-    let messageIndex = 0
-
-    let gridIndex = count
-
-    grid.forEach(square => {
-      // grid[gridIndex].innerText = `${message[0]}`
-      // loop through the grid and repeat line 66
-      // each loop should decrease the gridIndex by one
-      // and increase the message index by one
-      if (grid[gridIndex]) {
-        for (let i = 0; i <= message.length; i++) {
-          grid[gridIndex].innerText = `${message[messageIndex]}`
-        }
-        gridIndex --
-        messageIndex ++
-        console.log('messageIndex', messageIndex)
-        console.log('gridIndex', gridIndex)
-      }
-      square.innerText = ''
-    })
-
-
-    // let messageIndex = count
-    // messageIndex = messageIndex === 0 ? messageIndex : messageIndex - 1
-
-    // let messageIndex = count - 8
-    // console.log('messageIndex', messageIndex)
-
-    // if (messageIndex >= 0) {
-    //   grid[count].innerText = `${message[messageIndex]}`
-    //   // messageIndex --
-    // }
-
-
-
-
-    // for (let i = 0; i <= message.length; i++) {
-    //
-    // }
-
-    // while decreasing the grid index i need to increase the message index
-
-    // console.log('grid[index]', grid[index])
-    // console.log('index', index)
-
-    // while (index <= grid.length) {
-    //   index = index === 0 ? index : index + 1
-    //
-    // }
-
+    // DISPLAYS THE MESSAGE BACKWARDS ON THE FIRST FEW BOXES
+    // let messageIndex = 0
+    // let gridIndex = count
+    // gridIndex = gridIndex === 0 ? 8 : gridIndex - 1
     // grid.forEach(square => {
-    //   square[index].innerText = `${message[count]}`
+    //   // grid[gridIndex].innerText = `${message[0]}`
+    //   // loop through the grid and repeat line 66
+    //   // each loop should decrease the gridIndex by one
+    //   // and increase the message index by one
+    //   if (grid[gridIndex]) {
+    //     for (let i = 0; i <= 8; i++) {
+    //       grid[gridIndex].innerText = `${message[messageIndex]}`
+    //     }
+    //     gridIndex --
+    //     messageIndex ++
+    //     console.log('messageIndex', messageIndex)
+    //     console.log('gridIndex', gridIndex)
+    //   }
+    //   square.innerText = ''
     // })
+    // =====================================================
 
-    // message.forEach(letter => {
-    //   grid[letter].innerText = `${message[letter + count]}`
+    // PHASES THROUGH 4 LETTERS IN THE CENTRAL BOXES
+    // let messageIndex = 0
+    // let gridIndex = count + message.length
+    // gridIndex = gridIndex === (9 + message.length) ? 0 : gridIndex - 1
+    // grid.forEach(square => {
+    //   // grid[gridIndex].innerText = `${message[0]}`
+    //   // loop through the grid and repeat line 66
+    //   // each loop should decrease the gridIndex by one
+    //   // and increase the message index by one
+    //   for (let i = 0; i <= grid.length; i++) {
+    //     if (grid[gridIndex]) {
+    //       grid[gridIndex].innerText = `${message[messageIndex]}`
+    //     }
+    //     console.log('**==**')
+    //   }
+    //   gridIndex --
+    //   messageIndex ++
+    //   console.log('messageIndex', messageIndex)
+    //   console.log('gridIndex', gridIndex)
+    //   square.innerText = ''
     // })
+    //
+    // console.log('====================================')
+    // ============================================
 
-    // const index = count + message.length
-    // console.log('index', index)
-    // for (let i = 0; i < grid.length; i++) {
-    //   grid[i].innerText = `${message[i + count]}`
-    //   // index ++
-    // }
+    // DISPLAYS lroW
+    // let countValue = message.length + grid.length
+    //
+    // let messageIndex = 0
+    // let gridIndex = grid.length
+    // // gridIndex = gridIndex === (0 - message.length) ? grid.length : gridIndex - 1
+    // console.log('messageIndex', messageIndex)
+    // console.log('gridIndex', gridIndex)
+    // grid.forEach(square => {
+    //   if (grid[gridIndex]) {
+    //     grid[gridIndex].innerText = `${message[messageIndex]}`
+    //   }
+    //   gridIndex --
+    //   messageIndex ++
+    //   square.innerText = ''
+    //   // countValue --
+    // })
+    //
+    // console.log('====================================')
 
-    // if (message) {
-      // grid.forEach(square => {
-      //   square.innerText = `${message[count]}`
-      // })
 
-      // index = index === message.length ? 0 : index + 1
-      // grid[count].innerText = `${message[index]}`
-      // for (let i = 0; i <= message.length; i++) {
-      // }
 
-    // }
+
+
+
+
   }
 
   componentDidMount() {
+    // setInterval(this.countDown, 5000)
     setInterval(this.countDown, 1000)
+    setInterval(this.gridCount, 1000)
     // this.messageDisplay()
+
+    const grid = document.querySelectorAll('.messageGrid')
+    const gridCountValue = grid.length
+    this.setState({ gridCount: gridCountValue })
   }
 
   componentDidUpdate() {
@@ -168,6 +221,7 @@ class App extends React.Component {
               </div>
             </div>
             <div id="messageGridContainer" className="columns is-centered is-mobile">
+              <div className="messageGrid"></div>
               <div className="messageGrid"></div>
               <div className="messageGrid"></div>
               <div className="messageGrid"></div>
