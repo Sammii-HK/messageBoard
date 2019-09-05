@@ -32,11 +32,11 @@ class App extends React.Component {
   gridCount() {
     const form = document.forms[0]
     const message = form.elements[0].value
-    const grid = document.querySelectorAll('.messageGrid')
-    const gridCountValue = grid.length - 1
+    const display = this.state.display
+    const displayCountValue = display.length - 1
     const minCountValue = (0 - message.length)
     let newCount = this.state.gridCount
-    newCount = newCount === minCountValue ? gridCountValue : newCount - 1
+    newCount = newCount === minCountValue ? displayCountValue : newCount - 1
 
     console.log('>>>> gridCount', this.state.gridCount)
 
@@ -49,36 +49,26 @@ class App extends React.Component {
 
 
   messageDisplay() {
-
     const form = document.forms[0]
     const count = this.state.gridCount
     const message = form.elements[0].value.split('')
     const display = this.state.display
-    // const displayValue = display
-
-    console.log('display', display)
-
     let gridIndex = count
+    // let displayIndex = gridIndex - 1
 
     message.forEach(letter => {
       if (gridIndex < 9) {
         display[gridIndex] = letter
         gridIndex ++
+        display[gridIndex] = ''
       }
-      display[gridIndex] = ''
     })
 
+    // if (display.length > 9) {
+    //   display.pop()
+    // }
 
-
-    // message.forEach(letter => {
-    //   for (let i = 0; i <= display.length; i++) {
-    //     if (gridIndex < 9) {
-    //       display[gridIndex] = letter
-    //       gridIndex ++
-    //     }
-    //     display[i] = ''
-    //   }
-    // })
+    console.log('display', display.length)
 
 
   }
