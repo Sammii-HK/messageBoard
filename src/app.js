@@ -64,11 +64,11 @@ class App extends React.Component {
       }
     })
 
-    // if (display.length > 9) {
-    //   display.pop()
-    // }
+    if (display.length > 9) {
+      display.pop()
+    }
 
-    console.log('display', display.length)
+    // console.log('display', display)
 
 
   }
