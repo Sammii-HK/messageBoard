@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server",
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build"
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -18,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/Sammii-HK/messageBoard/issues"
   },
-  "homepage": "https://github.com/Sammii-HK/messageBoard",
+  "homepage": "https://github.com/Sammii-HK/messageBoard#readme",
   "dependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
@@ -26,7 +24,6 @@
     "babel-loader": "^8.0.6",
     "bulma": "^0.7.5",
     "css-loader": "^3.2.0",
-    "gh-pages": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.12.0",
     "react": "^16.9.0",
