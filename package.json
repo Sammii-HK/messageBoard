@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/Sammii-HK/messageBoard/issues"
   },
-  "homepage": "https://sammii-hk.github.io/messageBoard/",
+  "homepage": "https://sammii-hk.github.io/messageBoard/#readme",
   "dependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
