@@ -18,13 +18,14 @@
   "bugs": {
     "url": "https://github.com/Sammii-HK/messageBoard/issues"
   },
-  "homepage": "https://sammii-hk.github.io/messageBoard/readme",
+  "homepage": "https://sammii-hk.github.io/messageBoard#readme",
   "dependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "bulma": "^0.7.5",
+    "copy-webpack-plugin": "^5.0.4",
     "css-loader": "^3.2.0",
     "gh-pages": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
