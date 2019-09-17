@@ -90,7 +90,7 @@ class App extends React.Component {
     return (
       <section className="section">
         <div className="container">
-          <form onSubmit={this.handleSubmit}>
+          <form>
             <div className="field">
               <label className="label">Message:</label>
               <div className="control">
